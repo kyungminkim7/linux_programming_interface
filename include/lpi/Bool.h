@@ -1,3 +1,3 @@
 #pragma once
 
-typedef enum { FALSE, TRUE} Bool;
+typedef enum { FALSE, TRUE } Bool;
