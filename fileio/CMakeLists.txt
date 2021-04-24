@@ -10,3 +10,4 @@ include_directories(
 )
 
 add_executable(copy src/copy.c)
+add_executable(seek_io src/seek_io.c)
