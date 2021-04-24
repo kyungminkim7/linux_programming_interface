@@ -16,19 +16,19 @@ int main(int argc, char *argv[]) {
     }
 
     // Open input and output files
-    char *inputFilename = argv[1];
-    int inputFd = open(inputFilename, O_RDONLY);
+    const char *inputFilepath = argv[1];
+    int inputFd = open(inputFilepath, O_RDONLY);
     if (inputFd == -1) {
-        fprintf(stderr, "%s: Failed to open file %s\n", strerror(errno), inputFilename);
+        fprintf(stderr, "%s: Failed to open file %s\n", strerror(errno), inputFilepath);
         exit(EXIT_FAILURE);
     }
 
-    char *outputFilename = argv[2];
-    int outputFd = open(outputFilename,
+    const char *outputFilepath = argv[2];
+    int outputFd = open(outputFilepath,
             O_CREAT | O_WRONLY | O_TRUNC,
             S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH); // rw-rw-rw-
     if (outputFd == -1) {
-        fprintf(stderr, "%s: Failed to open file %s\n", strerror(errno), outputFilename);
+        fprintf(stderr, "%s: Failed to open file %s\n", strerror(errno), outputFilepath);
         exit(EXIT_FAILURE);
     }
 
@@ -37,24 +37,24 @@ int main(int argc, char *argv[]) {
     char buffer[BUFFER_SIZE];
     while ((numRead = read(inputFd, buffer, BUFFER_SIZE)) > 0) {
         if (write(outputFd, buffer, numRead) != numRead) {
-            fprintf(stderr, "Failed to write whole buffer to %s\n", outputFilename);
+            fprintf(stderr, "Failed to write whole buffer to %s\n", outputFilepath);
             exit(EXIT_FAILURE);
         }
     }
 
     if (numRead == -1) {
-        fprintf(stderr, "Failed to read %s\n", inputFilename);
+        fprintf(stderr, "Failed to read %s\n", inputFilepath);
         exit(EXIT_FAILURE);
     }
 
     // Cleanup
     if (close(inputFd) == -1) {
-        fprintf(stderr, "%s: Failed to close file %s\n", strerror(errno), inputFilename);
+        fprintf(stderr, "%s: Failed to close file %s\n", strerror(errno), inputFilepath);
         exit(EXIT_FAILURE);
     }
 
     if (close(outputFd) == -1) {
-        fprintf(stderr, "%s: Failed to close file %s\n", strerror(errno), outputFilename);
+        fprintf(stderr, "%s: Failed to close file %s\n", strerror(errno), outputFilepath);
         exit(EXIT_FAILURE);
     }
 
