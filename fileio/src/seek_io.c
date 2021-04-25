@@ -36,19 +36,26 @@ int main(int argc, char *argv[]) {
         }
 
         switch(argv[i][0]) {
-            case 'r': { // Read bytes and display in text
+            case 'r': { // Read bytes and display in text at current offset
                 unsigned long length = getUnsignedLong(&argv[i][1]);
                 readDisplayBytes(fd, length, TEXT);
                 break;
             }
 
-            case 'R': { // Read bytes and display in hex
+            case 'R': { // Read bytes and display in hex at current offset
                 unsigned long length = getUnsignedLong(&argv[i][1]);
                 readDisplayBytes(fd, length, HEX);
                 break;
             }
 
-            case 'w': {
+            case 'w': { // Write string at current offset
+                const char *str = &argv[i][1];
+                ssize_t numBytesWritten = write(fd, str, strlen(str));
+                if (numBytesWritten == -1) {
+                    fprintf(stderr, "%s: Failed to write to %s\n", strerror(errno), filepath);
+                    exit(EXIT_FAILURE);
+                }
+                printf("Wrote %lu bytes to %s\n", (unsigned long) numBytesWritten, filepath);
                 break;
             }
 
