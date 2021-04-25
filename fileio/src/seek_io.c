@@ -10,6 +10,7 @@
 typedef enum { TEXT,HEX } DisplayType;
 
 unsigned long getUnsignedLong(const char *str);
+long getLong(const char *str);
 void readDisplayBytes(int fd, unsigned long length, DisplayType displayType);
 
 int main(int argc, char *argv[]) {
@@ -59,7 +60,14 @@ int main(int argc, char *argv[]) {
                 break;
             }
 
-            case 's': {
+            case 's': { // Seek to byte offset from start of file
+                long offset = getLong(&argv[i][1]);
+                off_t offsetSeeked = lseek(fd, offset, SEEK_SET);
+                if (offsetSeeked != offset) {
+                    fprintf(stderr, "Failed to seek to offset %ld\n", (long) offset);
+                    exit(EXIT_FAILURE);
+                }
+                printf("Seeked to offset %ld\n", (long) offsetSeeked);
                 break;
             }
             default:
@@ -82,6 +90,16 @@ unsigned long getUnsignedLong(const char *str) {
     unsigned long result = strtoul(str, NULL, 10);
     if (errno == -1) {
         fprintf(stderr, "%s: Failed to convert %s to unsigned long\n", strerror(errno), str);
+        exit(EXIT_FAILURE);
+    }
+    return result;
+}
+
+long getLong(const char *str) {
+    errno=0;
+    long result = strtol(str, NULL, 10);
+    if (errno == -1) {
+        fprintf(stderr, "%s: Failed to convert %s to long\n", strerror(errno), str);
         exit(EXIT_FAILURE);
     }
     return result;
