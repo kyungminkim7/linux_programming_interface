@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -6,7 +7,10 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-static long getLong(const char *str);
+typedef enum { TEXT,HEX } DisplayType;
+
+unsigned long getUnsignedLong(const char *str);
+void readDisplayBytes(int fd, unsigned long length, DisplayType displayType);
 
 int main(int argc, char *argv[]) {
     if (argc < 3 || strcmp(argv[1], "--help") == 0) {
@@ -33,12 +37,14 @@ int main(int argc, char *argv[]) {
 
         switch(argv[i][0]) {
             case 'r': { // Read bytes and display in text
-                long length = getLong(argv[i][1]);
+                unsigned long length = getUnsignedLong(&argv[i][1]);
+                readDisplayBytes(fd, length, TEXT);
                 break;
             }
 
             case 'R': { // Read bytes and display in hex
-                long length = getLong(argv[i][1]);
+                unsigned long length = getUnsignedLong(&argv[i][1]);
+                readDisplayBytes(fd, length, HEX);
                 break;
             }
 
@@ -64,13 +70,45 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-long getLong(const char *str) {
+unsigned long getUnsignedLong(const char *str) {
     errno=0;
-    long result = strtol(str, NULL, 10);
+    unsigned long result = strtoul(str, NULL, 10);
     if (errno == -1) {
-        fprintf(stderr, "%s: Failed to convert %s to long\n", strerror(errno), str);
+        fprintf(stderr, "%s: Failed to convert %s to unsigned long\n", strerror(errno), str);
         exit(EXIT_FAILURE);
     }
-
     return result;
+}
+
+void readDisplayBytes(int fd, unsigned long length, DisplayType displayType) {
+    char *buffer = malloc(length); 
+    if (buffer == NULL) {
+        fprintf(stderr, "Failed to malloc %ld bytes\n", length);
+        exit(EXIT_FAILURE);
+    }
+    ssize_t numBytesRead = read(fd, buffer, length);
+
+    if (numBytesRead == -1) {
+        fprintf(stderr, "%s: Failed to read %ld bytes\n", strerror(errno), length);
+        exit(EXIT_FAILURE);
+    } else if (numBytesRead == 0) {
+        printf("End-of-file\n");
+    } else {
+        switch (displayType) {
+        case TEXT:
+            for (int j = 0; j < numBytesRead; ++j) {
+                printf("%c", isprint((unsigned char) buffer[j]) ? buffer[j] : '?');
+            }
+            break;
+        case HEX:
+            for (int j = 0; j < numBytesRead; ++j) {
+                printf("%02x ", (unsigned int) buffer[j]);
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+    free(buffer);
 }
