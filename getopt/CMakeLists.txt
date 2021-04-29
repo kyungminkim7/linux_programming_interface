@@ -1,17 +1,12 @@
 cmake_minimum_required(VERSION 3.5)
-project(linux_programming_interface)
+project(t_getopt)
 
-add_library(${PROJECT_NAME}
-    "src/Error.c"
-)
+link_libraries(linux_programming_interface)
 
-target_include_directories(${PROJECT_NAME} 
-    PUBLIC
+include_directories(
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>"
-    PRIVATE
         "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
-add_subdirectory(fileio)
-add_subdirectory(getopt)
+add_executable(t_getopt src/t_getopt.c)
