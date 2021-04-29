@@ -10,3 +10,4 @@ include_directories(
 )
 
 add_executable(display_env src/display_env.c)
+add_executable(modify_env src/modify_env.c)
