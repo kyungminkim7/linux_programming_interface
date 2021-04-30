@@ -86,20 +86,22 @@ int main(int argc, char *argv[]) {
 }
 
 unsigned long getUnsignedLong(const char *str) {
+    char *endptr = NULL;
     errno = 0;
-    unsigned long result = strtoul(str, NULL, 10);
-    if (errno != 0) {
-        fprintf(stderr, "%s: Failed to convert %s to unsigned long\n", strerror(errno), str);
+    unsigned long result = strtoul(str, &endptr, 10);
+    if (errno != 0 || endptr == str) {
+        fprintf(stderr, "Failed to convert %s to unsigned long\n", str);
         exit(EXIT_FAILURE);
     }
     return result;
 }
 
 long getLong(const char *str) {
+    char *endptr = NULL;
     errno = 0;
-    long result = strtol(str, NULL, 10);
-    if (errno != 0) {
-        fprintf(stderr, "%s: Failed to convert %s to long\n", strerror(errno), str);
+    long result = strtol(str, &endptr, 10);
+    if (errno != 0 || endptr == str) {
+        fprintf(stderr, "Failed to convert %s to long\n", str);
         exit(EXIT_FAILURE);
     }
     return result;
