@@ -16,3 +16,4 @@ target_include_directories(${PROJECT_NAME}
 add_subdirectory(fileio)
 add_subdirectory(getopt)
 add_subdirectory(proc)
+add_subdirectory(memalloc)
