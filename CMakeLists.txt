@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(linux_programming_interface)
+project(linux_programming_interface C)
 
 add_library(${PROJECT_NAME}
     "src/Error.c"

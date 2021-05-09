@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(fileio)
+project(fileio C)
 
 link_libraries(linux_programming_interface)
 

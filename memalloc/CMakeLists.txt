@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(t_getopt)
+project(t_getopt C)
 
 link_libraries(linux_programming_interface)
 
