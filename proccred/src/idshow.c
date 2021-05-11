@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < numGroups; ++i) {
         printf("%s(%ld)\n", 
             getGroupnameFromGID(supplementaryGroups[i]),
-            supplementaryGroups[i]);
+            (long) supplementaryGroups[i]);
     }
     printf("\n");
     
