@@ -11,3 +11,4 @@ include_directories(
 
 add_executable(calendar_time src/calendar_time.c)
 add_executable(show_time src/show_time.c)
+add_executable(process_time src/process_time.c)
