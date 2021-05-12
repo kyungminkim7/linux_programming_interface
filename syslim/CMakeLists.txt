@@ -10,3 +10,4 @@ include_directories(
 )
 
 add_executable(t_sysconf src/t_sysconf.c)
+add_executable(t_fpathconf src/t_fpathconf.c)
