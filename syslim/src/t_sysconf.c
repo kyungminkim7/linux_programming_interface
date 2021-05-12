@@ -22,7 +22,7 @@ void printSysconf(const char *msg, int name) {
     long limit = sysconf(name);
     if (limit == -1) {
         if (errno == 0) {
-            printf("%s: indeterminate\n"); 
+            printf("%s: indeterminate\n", msg); 
         } else {
             fprintf(stderr, "Failed to get limit for %s - %s\n", msg, strerror(errno));
             exit(EXIT_FAILURE);
