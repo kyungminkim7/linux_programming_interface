@@ -10,3 +10,4 @@ include_directories(
 )
 
 add_executable(procfs_pidmax src/procfs_pidmax.c)
+add_executable(t_uname src/t_uname.c)
