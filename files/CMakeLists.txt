@@ -10,3 +10,4 @@ include_directories(
 )
 
 add_executable(t_stat src/t_stat.c)
+add_executable(t_chown src/t_chown.c)
