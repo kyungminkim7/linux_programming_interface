@@ -3,6 +3,7 @@ project(linux_programming_interface C)
 
 add_library(${PROJECT_NAME}
     "src/Error.c"
+    "src/FilePerms.c"
 )
 
 target_include_directories(${PROJECT_NAME} 
@@ -24,3 +25,12 @@ add_subdirectory(syslim)
 add_subdirectory(sysinfo)
 add_subdirectory(filesys)
 add_subdirectory(files)
+
+# Tests
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    include(CTest)
+
+    option(WITH_EXAMPLES "Build examples" OFF)
+    add_subdirectory(extern/cmocka)
+    add_subdirectory(tests)
+endif()
