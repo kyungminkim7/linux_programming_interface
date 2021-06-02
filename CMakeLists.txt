@@ -26,6 +26,7 @@ add_subdirectory(sysinfo)
 add_subdirectory(filesys)
 add_subdirectory(files)
 add_subdirectory(xattr)
+add_subdirectory(dirs_links)
 
 # Tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
