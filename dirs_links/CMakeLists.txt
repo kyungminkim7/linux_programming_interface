@@ -11,3 +11,4 @@ include_directories(
 
 add_executable(t_unlink src/t_unlink.c)
 add_executable(list_files src/list_files.c)
+add_executable(nftw_dir_tree src/nftw_dir_tree.c)
