@@ -10,3 +10,4 @@ include_directories(
 )
 
 add_executable(ouch.c src/ouch.c)
+add_executable(intquit.c src/intquit.c)
