@@ -9,5 +9,6 @@ include_directories(
         "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
-add_executable(ouch.c src/ouch.c)
-add_executable(intquit.c src/intquit.c)
+add_executable(ouch src/ouch.c)
+add_executable(intquit src/intquit.c)
+add_executable(t_kill src/t_kill.c)
