@@ -4,6 +4,7 @@ project(linux_programming_interface C)
 add_library(${PROJECT_NAME}
     "src/Error.c"
     "src/FilePerms.c"
+    "src/SignalFunctions.c"
 )
 
 target_include_directories(${PROJECT_NAME} 
