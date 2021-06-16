@@ -45,7 +45,7 @@ int getInt(const char *str) {
     errno = 0;
     long result = strtol(str, &endptr, 0);
     if (errno != 0 || endptr == str) {
-        fprintf(stderr, "Failed to convert %s to long - %s\n", str, strerror(errno));
+        fprintf(stderr, "Failed to convert %s to long", str);
         exit(EXIT_FAILURE);
     }
     return result;

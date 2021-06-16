@@ -12,3 +12,4 @@ include_directories(
 add_executable(ouch src/ouch.c)
 add_executable(intquit src/intquit.c)
 add_executable(t_kill src/t_kill.c)
+add_executable(sig_sender src/sig_sender.c)
