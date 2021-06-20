@@ -21,3 +21,5 @@ target_link_libraries(nonreentrant crypt)
 add_executable(sigmask_longjmp src/sigmask_longjmp.c)
 add_executable(sigmask_longjmp_sigsetjump src/sigmask_longjmp.c)
 target_compile_definitions(sigmask_longjmp_sigsetjump PRIVATE USE_SIGSETJUMP)
+
+add_executable(t_sigaltstack src/t_sigaltstack.c)
