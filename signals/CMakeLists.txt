@@ -23,3 +23,4 @@ add_executable(sigmask_longjmp_sigsetjump src/sigmask_longjmp.c)
 target_compile_definitions(sigmask_longjmp_sigsetjump PRIVATE USE_SIGSETJUMP)
 
 add_executable(t_sigaltstack src/t_sigaltstack.c)
+add_executable(t_sigqueue src/t_sigqueue.c)
