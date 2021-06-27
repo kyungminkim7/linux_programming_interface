@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     int data = getLong(argv[3]);
     int numSigs = (argc > 4) ? getLong(argv[4]) : 1;
 
-    for (int i = 1; i < numSigs; ++i) {
+    for (int i = 0; i < numSigs; ++i) {
         union sigval value;
         value.sival_int = data + i;
 
