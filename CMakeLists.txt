@@ -30,6 +30,7 @@ add_subdirectory(xattr)
 add_subdirectory(dirs_links)
 add_subdirectory(inotify)
 add_subdirectory(signals)
+add_subdirectory(procexec)
 
 # Tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
