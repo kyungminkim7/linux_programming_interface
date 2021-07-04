@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 int main(int argc, char *argv[]) {
@@ -16,14 +17,14 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    printf("File offset before fork(): %lld\n", lseek(fd, 0, SEEK_CUR));
+    printf("File offset before fork(): %lld\n", (long long) lseek(fd, 0, SEEK_CUR));
 
-    int flags = fcntl(F_GETFD);
+    int flags = fcntl(fd, F_GETFD);
     if (flags == -1) {
         fprintf(stderr, "Failed to get file flags from %s - %s\n", filepath, strerror(errno));
         exit(EXIT_FAILURE);
     }
-    printf("O_APPEND flag before fork() is: %s", (flags & O_APPEND) ? "on" : "off");
+    printf("O_APPEND flag before fork() is: %s\n", (flags & O_APPEND) ? "on" : "off");
 
     switch (fork()) {
     case -1:
@@ -31,6 +32,22 @@ int main(int argc, char *argv[]) {
         break;
     case 0:
         // Child process
+        if (lseek(fd, 1000, SEEK_SET) == -1) {
+            fprintf(stderr, "Failed to lseek() %s - %s\n", filepath, strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+
+        flags = fcntl(fd, F_GETFD);
+        if (flags == -1) {
+            fprintf(stderr, "Failed to get file flags from %s - %s\n", filepath, strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+
+        flags |= O_APPEND;
+        if (fcntl(fd, F_SETFD, flags) == -1) {
+            fprintf(stderr, "Failed to set O_APPEND flag on fd via fcntl() - %s\n", strerror(errno));
+            exit(EXIT_FAILURE);
+        }
         break;
     default:
         // Parent process
@@ -40,6 +57,19 @@ int main(int argc, char *argv[]) {
         }
         printf("Child process has exited\n");
 
+        off_t offset = lseek(fd, 0, SEEK_CUR);
+        if (offset == -1) {
+            fprintf(stderr, "Failed to lseek() %s - %s\n", filepath, strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        printf("File offset in parent: %lld\n", (long long) offset);
+
+        flags = fcntl(fd, F_GETFD);
+        if (flags == -1) {
+            fprintf(stderr, "Failed to get file flags from %s - %s\n", filepath, strerror(errno));
+            exit(EXIT_FAILURE);
+        }
+        printf("O_APPEND flag in parent is: %s\n", (flags & O_APPEND) ? "on" : "off");
 
         if (unlink(filepath) == -1) {
             fprintf(stderr, "Failed to unlink() %s - %s\n", filepath, strerror(errno));
@@ -47,7 +77,6 @@ int main(int argc, char *argv[]) {
         }
         break;
     }
-
 
     return EXIT_SUCCESS;
 }
