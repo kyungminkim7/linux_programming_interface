@@ -12,3 +12,4 @@ include_directories(
 add_executable(t_fork t_fork.c)
 add_executable(fork_file_sharing fork_file_sharing.c)
 add_executable(multi_wait multi_wait.c)
+add_executable(t_acct_on t_acct_on.c)
