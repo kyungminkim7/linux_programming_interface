@@ -13,3 +13,4 @@ include_directories(
 )
 
 add_executable(simple_thread simple_thread.c)
+add_executable(thread_incr thread_incr.c)
