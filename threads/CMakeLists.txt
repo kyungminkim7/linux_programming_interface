@@ -14,3 +14,5 @@ include_directories(
 
 add_executable(simple_thread simple_thread.c)
 add_executable(thread_incr thread_incr.c)
+add_executable(thread_incr_mutex thread_incr_mutex.c)
+add_executable(thread_multijoin thread_multijoin.c)
