@@ -11,3 +11,4 @@ include_directories(
 
 add_executable(simple_pipe simple_pipe.c)
 add_executable(pipe_sync pipe_sync.c)
+add_executable(pipe_ls_wc pipe_ls_wc.c)
