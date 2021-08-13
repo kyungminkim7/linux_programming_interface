@@ -33,6 +33,7 @@ add_subdirectory(signals)
 add_subdirectory(procexec)
 add_subdirectory(threads)
 add_subdirectory(pipes)
+add_subdirectory(svipc)
 
 # Tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
