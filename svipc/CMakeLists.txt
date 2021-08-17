@@ -12,3 +12,4 @@ include_directories(
 add_executable(svmsg_demo_server svmsg_demo_server.c)
 add_executable(svmsg_create svmsg_create.c)
 add_executable(svmsg_send svmsg_send.c)
+add_executable(svmsg_receive svmsg_receive.c)
