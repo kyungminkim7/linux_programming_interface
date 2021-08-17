@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
     if (argc > optind + 2) {
         const char *text = argv[optind + 2];
-        textLength = strlen(text);
+        textLength = strlen(text) + 1;
         if (textLength > MAX_MSG_TEXT_LENGTH) {
             fprintf(stderr, "msg-text too long (max: %d chars)\n", MAX_MSG_TEXT_LENGTH);
             exit(EXIT_FAILURE);
