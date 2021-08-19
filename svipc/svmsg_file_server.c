@@ -24,6 +24,8 @@ int main(int argc, char *argv[]) {
                 fprintf(stderr, "Failed to msgget() server id from key 0x%x - %s\n", SERVER_KEY, strerror(errno));
                 exit(EXIT_FAILURE);
             }
+            
+            break;
         } else {
             fprintf(stderr, "Failed to msgget() server id from key 0x%x - %s\n", SERVER_KEY, strerror(errno));
             exit(EXIT_FAILURE);
