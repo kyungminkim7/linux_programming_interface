@@ -10,3 +10,4 @@ include_directories(
 )
 
 add_executable(svsem_demo svsem_demo.c)
+add_executable(svsem_mon svsem_mon.c)
