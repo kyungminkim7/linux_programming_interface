@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    if (semctl(semid, 0, GETALL) == -1) {
+    if (semctl(semid, 0, GETALL, arg) == -1) {
         free(arg.array);
         fprintf(stderr, "Failed to semctl() GETALL semid %d - %s\n", semid, strerror(errno));
         exit(EXIT_FAILURE);
