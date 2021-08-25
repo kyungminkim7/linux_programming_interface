@@ -35,6 +35,7 @@ add_subdirectory(threads)
 add_subdirectory(pipes)
 add_subdirectory(svipc)
 add_subdirectory(svsem)
+add_subdirectory(svshm)
 
 # Tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
