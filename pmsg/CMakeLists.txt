@@ -12,3 +12,4 @@ include_directories(
 add_executable(pmsg_unlink pmsg_unlink.c)
 add_executable(pmsg_create pmsg_create.c)
 add_executable(pmsg_getattr pmsg_getattr.c)
+add_executable(pmsg_send pmsg_send.c)
