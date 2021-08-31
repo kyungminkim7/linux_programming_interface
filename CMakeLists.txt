@@ -38,6 +38,7 @@ add_subdirectory(svsem)
 add_subdirectory(svshm)
 add_subdirectory(mmap)
 add_subdirectory(pmsg)
+add_subdirectory(psem)
 
 # Tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
