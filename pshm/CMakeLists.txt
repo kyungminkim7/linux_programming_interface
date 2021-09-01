@@ -12,3 +12,4 @@ include_directories(
 add_executable(pshm_create pshm_create.c)
 add_executable(pshm_write pshm_write.c)
 add_executable(pshm_read pshm_read.c)
+add_executable(pshm_unlink pshm_unlink.c)
