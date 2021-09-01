@@ -40,6 +40,7 @@ add_subdirectory(mmap)
 add_subdirectory(pmsg)
 add_subdirectory(psem)
 add_subdirectory(pshm)
+add_subdirectory(filelock)
 
 # Tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
