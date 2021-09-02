@@ -8,3 +8,4 @@ include_directories(
 )
 
 add_executable(t_flock t_flock.c)
+add_executable(i_fcntl_locking i_fcntl_locking.c)
