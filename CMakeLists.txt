@@ -41,6 +41,7 @@ add_subdirectory(pmsg)
 add_subdirectory(psem)
 add_subdirectory(pshm)
 add_subdirectory(filelock)
+add_subdirectory(sockets)
 
 # Tests
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
