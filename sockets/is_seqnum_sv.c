@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
 
     struct addrinfo *addrp;
     int listenSocketFd;
-    for (addrp = serverAddrs; addrp != NULL; addrp = serverAddrs->ai_next) {
+    for (addrp = serverAddrs; addrp != NULL; addrp = addrp->ai_next) {
         listenSocketFd = socket(addrp->ai_family, addrp->ai_socktype, 0);
         if (listenSocketFd == -1) {
             continue;
